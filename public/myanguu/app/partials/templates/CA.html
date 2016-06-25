@@ -1,0 +1,55 @@
+<!-- <script type="text/ng-template" id="template1.html">  -->
+    
+    <!-- <div class="col-md-12 col-sm-12 col-xs-12 table-responsive"> -->
+        <!-- <div ng-repeat="section in sections"> -->
+                <div ng-if="section.type != 'projects'">
+                    <h4 class="title pull-left">{{section.name}}</h4>
+                    <table class="table table-bordered table-hover bg-white-only">
+                        <tr style="font-weight: bold">
+                            <td style="width:2%">ID - CA</td>
+                            <td style="width:51%">Descripation</td>
+                            <td style="width:10%"></td>
+                            <td style="width:2%"><input type="checkbox" ng-click="myClickAll()"></td>
+                        </tr>
+                        <tr ng-repeat="head in getTemplateData(section.smallname)">
+                           {{head}}
+                            <td class="v-middle">
+                                <!-- editable username (text with validation) -->
+                                <span editable-text="head.id" e-name="id" e-form="CAform">
+                                        {{ head.id || 'empty' }}
+                                </span>
+                            </td>
+                            <td class="v-middle">
+                                <!-- editable status (select-local) -->
+                                <span editable-textarea="head.content" e-name="content" e-form="CAform" e-cols="60"  e-rows="4">
+                                  {{ head.content || 'empty' }}
+                                </span>
+                            </td>
+                            <td style="white-space: nowrap">
+                                <!-- form -->
+                                <form editable-form name="CAform" onbeforesave="saveHeader($data, head.id)" ng-show="CAform.$visible" class="form-buttons form-inline" shown="insertedHead == head">
+                                    <button type="submit" ng-disabled="CAform.$waiting" class="btn btn-xs btn-info">
+                                      <i class="material-icons" style="font-size:14px;">save</i>
+                                    </button> 
+                                    <button type="button" ng-disabled="CAform.$waiting" ng-click="CAform.$cancel()" class="btn btn-xs btn-default">
+                                      <i class="material-icons" style="font-size:14px;">cancel</i>
+                                    </button>
+                                </form>
+                                <div class="buttons" ng-show="!CAform.$visible">
+                                    <button type="button" class="btn btn-xs btn-info"  ng-click="CAform.$show()">
+                                      <i class="material-icons" style="font-size:14px;">visibility</i>
+                                    </button>
+                                    <button type="button" class="btn btn-xs btn-info"  ng-click="deleteContent($index,section.smallname)">
+                                      <i class="material-icons" style="font-size:14px;">delete</i>
+                                    </button>
+                                </div>
+                            </td>
+                            <td style="white-space: nowrap">
+                            <input type="checkbox" ng-model="head.check" ng-click="myClick(head.id)">
+                            </td>
+                        </tr>
+                    </table>
+                    <button class="btn btn-primary btn-sm" ng-click="addSingleRow(section.id, null, section.smallname)">Add row</button>
+            </div> 
+        <!-- </uib-tab>   -->
+<!-- </script>  

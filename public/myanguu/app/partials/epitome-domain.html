@@ -1,0 +1,305 @@
+<div class='content-wrapper' ng-init="app.settings.pagetitle = 'Technologies';">
+    <div class="col-lg-12" ng-controller="EpitomeDomainCtrl">
+        <section class="box ">
+            <header class="panel_header">
+                <h2 class="title pull-left">Headers</h2>
+                <div class="actions panel_actions pull-right">
+                    <i class="box_toggle material-icons">expand_more</i>
+                    <!-- <i class="box_setting material-icons" ng-click="section_modal()">mode_edit</i> -->
+                    <!-- <i class="box_close material-icons">close</i> -->
+                </div>
+            </header>
+            <div class="content-body">
+                <div class="row">
+                    <uib-tabset justified="true" class="tab-container primary">
+                     <uib-tab ng-repeat="tab in tabs" active="tab.active" disabled="tab.disabled">
+                                    <uib-tab-heading>
+                                        <i class="fa fa-{{tab.icon}}"></i> {{tab.title}}
+                                    </uib-tab-heading>
+                    <!-- <div class="col-md-12 col-sm-12 col-xs-12 table-responsive"> -->
+                        <table class="table table-bordered table-hover bg-white-only">
+                            <tr style="font-weight: bold">
+                                <td style="width:35%">ID</td>
+                                <td style="width:15%">Tag Name</td>
+                                <td style="width:35%">Value</td>
+                                <td style="width:10%"></td>
+                                <td style="width:5%"> <div ng-if="tab.title == 'Messages'"><input type="checkbox" ng-click="myClickAll()"></div></td>
+                            </tr>
+                            <tr ng-repeat="head in headers">
+                                <td class="v-middle">
+                                    <!-- editable username (text with validation) -->
+                                    <span editable-text="head.id" e-name="id" e-form="headerform">
+          {{ head.id || 'empty' }}
+        </span>
+                                </td>
+                                <td class="v-middle">
+                                    <!-- editable status (select-local) -->
+                                    <span editable-text="head.tag_name" e-name="tag_name" e-form="headerform" >
+          {{ head.tag_name || 'empty' }}
+        </span>
+                                </td>
+                                <td class="v-middle">
+                                    <!-- editable group (select-remote) -->
+                                    <span editable-text="head.value" e-name="value" e-form="headerform" >
+          {{ head.value || 'empty' }}
+        </span>
+                                </td>
+                                <td style="white-space: nowrap">
+                                    <!-- form -->
+                                    <form editable-form name="headerform" onbeforesave="saveHeader($data, head.id)" ng-show="headerform.$visible" class="form-buttons form-inline" shown="insertedHead == head">
+                                        <button type="submit" ng-disabled="headerform.$waiting" class="btn btn-xs btn-info">
+                                          <i class="material-icons" style="font-size:14px;">save</i>
+                                        </button> 
+                                        <button type="button" ng-disabled="headerform.$waiting" ng-click="headerform.$cancel()" class="btn btn-xs btn-default">
+                                          <i class="material-icons" style="font-size:14px;">cancel</i>
+                                        </button>
+                                    </form>
+                                    <div class="buttons" ng-show="!headerform.$visible">
+                                        <button type="button" class="btn btn-xs btn-info"  ng-click="headerform.$show()">
+                                          <i class="material-icons" style="font-size:14px;">visibility</i>
+                                        </button>
+                                        <button type="button" class="btn btn-xs btn-info"  ng-click="removeSingleHeader($index)">
+                                          <i class="material-icons" style="font-size:14px;">delete</i>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td style="white-space: nowrap">
+                                <input type="checkbox" ng-model="head.check" ng-click="myClick(head.id)">
+                                </td>
+                            </tr>
+                        </table>
+                        <button class="btn btn-primary btn-sm" ng-click="addSingleHeader()">Add row</button>
+                    <!-- </div> -->
+                    </uib-tab>
+                    </uib-tabset>
+                </div>
+            </div>
+        </section>
+        <br />
+
+     
+     
+                                       
+        <section class="box ">
+            <header class="panel_header">
+                <h2 class="title pull-left">Project</h2>
+                <div class="actions panel_actions pull-right">
+                    <i class="box_toggle material-icons">expand_more</i>
+                    <!-- <i class="box_setting material-icons" ng-click="section_modal()">mode_edit</i> -->
+                    <!-- <i class="box_close material-icons">close</i> -->
+                </div>
+            </header>
+            <div class="content-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 table-responsive">
+                        <table class="table table-bordered table-hover bg-white-only">
+                            <tr style="font-weight: bold">
+                                <td style="width:35%">ID</td>
+                                <td style="width:15%">Tag Name</td>
+                                <td style="width:35%">Value</td>
+                                <td style="width:10%"></td>
+                                <td style="width:5%"><input type="checkbox" ng-click="myClickAll()"></td>
+                            </tr>
+                            <tr ng-repeat="head in headers">
+                                <td class="v-middle">
+                                    <!-- editable username (text with validation) -->
+                                    <span editable-text="head.id" e-name="id" e-form="headerform">
+          {{ head.id || 'empty' }}
+        </span>
+                                </td>
+                                <td class="v-middle">
+                                    <!-- editable status (select-local) -->
+                                    <span editable-text="head.tag_name" e-name="tag_name" e-form="headerform" >
+          {{ head.tag_name || 'empty' }}
+        </span>
+                                </td>
+                                <td class="v-middle">
+                                    <!-- editable group (select-remote) -->
+                                    <span editable-text="head.value" e-name="value" e-form="headerform" >
+          {{ head.value || 'empty' }}
+        </span>
+                                </td>
+                                <td style="white-space: nowrap">
+                                    <!-- form -->
+                                    <form editable-form name="headerform" onbeforesave="saveHeader($data, head.id)" ng-show="headerform.$visible" class="form-buttons form-inline" shown="insertedHead == head">
+                                        <button type="submit" ng-disabled="headerform.$waiting" class="btn btn-xs btn-info">
+                                          <i class="material-icons" style="font-size:14px;">save</i>
+                                        </button> 
+                                        <button type="button" ng-disabled="headerform.$waiting" ng-click="headerform.$cancel()" class="btn btn-xs btn-default">
+                                          <i class="material-icons" style="font-size:14px;">cancel</i>
+                                        </button>
+                                    </form>
+                                    <div class="buttons" ng-show="!headerform.$visible">
+                                        <button type="button" class="btn btn-xs btn-info"  ng-click="headerform.$show()">
+                                          <i class="material-icons" style="font-size:14px;">visibility</i>
+                                        </button>
+                                        <button type="button" class="btn btn-xs btn-info"  ng-click="removeSingleHeader($index)">
+                                          <i class="material-icons" style="font-size:14px;">delete</i>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td style="white-space: nowrap">
+                                <input type="checkbox" ng-model="head.check" ng-click="myClick(head.id)">
+                                </td>
+                            </tr>
+                        </table>
+                        <button class="btn btn-primary btn-sm" ng-click="addSingleHeader()">Add row</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <br />
+
+     
+     
+
+
+        <section class="box ">
+            <header class="panel_header">
+                <h2 class="title pull-left">Education</h2>
+                <div class="actions panel_actions pull-right">
+                    <i class="box_toggle material-icons">expand_more</i>
+                    <!-- <i class="box_setting material-icons" ng-click="section_modal()">mode_edit</i> -->
+                    <!-- <i class="box_close material-icons">close</i> -->
+                </div>
+            </header>
+            <div class="content-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 table-responsive">
+                        <table class="table table-bordered table-hover bg-white-only">
+                            <tr style="font-weight: bold">
+                                <td style="width:35%">ID</td>
+                                <td style="width:15%">Tag Name</td>
+                                <td style="width:35%">Value</td>
+                                <td style="width:10%"></td>
+                                <td style="width:5%"><input type="checkbox" ng-click="myClickAll()"></td>
+                            </tr>
+                            <tr ng-repeat="head in headers">
+                                <td class="v-middle">
+                                    <!-- editable username (text with validation) -->
+                                    <span editable-text="head.id" e-name="id" e-form="headerform">
+          {{ head.id || 'empty' }}
+        </span>
+                                </td>
+                                <td class="v-middle">
+                                    <!-- editable status (select-local) -->
+                                    <span editable-text="head.tag_name" e-name="tag_name" e-form="headerform" >
+          {{ head.tag_name || 'empty' }}
+        </span>
+                                </td>
+                                <td class="v-middle">
+                                    <!-- editable group (select-remote) -->
+                                    <span editable-text="head.value" e-name="value" e-form="headerform" >
+          {{ head.value || 'empty' }}
+        </span>
+                                </td>
+                                <td style="white-space: nowrap">
+                                    <!-- form -->
+                                    <form editable-form name="headerform" onbeforesave="saveHeader($data, head.id)" ng-show="headerform.$visible" class="form-buttons form-inline" shown="insertedHead == head">
+                                        <button type="submit" ng-disabled="headerform.$waiting" class="btn btn-xs btn-info">
+                                          <i class="material-icons" style="font-size:14px;">save</i>
+                                        </button> 
+                                        <button type="button" ng-disabled="headerform.$waiting" ng-click="headerform.$cancel()" class="btn btn-xs btn-default">
+                                          <i class="material-icons" style="font-size:14px;">cancel</i>
+                                        </button>
+                                    </form>
+                                    <div class="buttons" ng-show="!headerform.$visible">
+                                        <button type="button" class="btn btn-xs btn-info"  ng-click="headerform.$show()">
+                                          <i class="material-icons" style="font-size:14px;">visibility</i>
+                                        </button>
+                                        <button type="button" class="btn btn-xs btn-info"  ng-click="removeSingleHeader($index)">
+                                          <i class="material-icons" style="font-size:14px;">delete</i>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td style="white-space: nowrap">
+                                <input type="checkbox" ng-model="head.check" ng-click="myClick(head.id)">
+                                </td>
+                            </tr>
+                        </table>
+                        <button class="btn btn-primary btn-sm" ng-click="addSingleHeader()">Add row</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <br />
+
+     
+     
+
+
+        <section class="box ">
+            <header class="panel_header">
+                <h2 class="title pull-left">Sections</h2>
+                <div class="actions panel_actions pull-right">
+                    <i class="box_toggle material-icons">expand_more</i>
+                    <!-- <i class="box_setting material-icons" ng-click="section_modal()">mode_edit</i> -->
+                    <!-- <i class="box_close material-icons">close</i> -->
+                </div>
+            </header>
+            <div class="content-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 table-responsive">
+                        <table class="table table-bordered table-hover bg-white-only">
+                            <tr style="font-weight: bold">
+                                <td style="width:35%">ID</td>
+                                <td style="width:15%">Tag Name</td>
+                                <td style="width:35%">Value</td>
+                                <td style="width:10%"></td>
+                                <td style="width:5%"><input type="checkbox" ng-click="myClickAll()"></td>
+                            </tr>
+                            <tr ng-repeat="head in headers">
+                                <td class="v-middle">
+                                    <!-- editable username (text with validation) -->
+                                    <span editable-text="head.id" e-name="id" e-form="headerform">
+          {{ head.id || 'empty' }}
+        </span>
+                                </td>
+                                <td class="v-middle">
+                                    <!-- editable status (select-local) -->
+                                    <span editable-text="head.tag_name" e-name="tag_name" e-form="headerform" >
+          {{ head.tag_name || 'empty' }}
+        </span>
+                                </td>
+                                <td class="v-middle">
+                                    <!-- editable group (select-remote) -->
+                                    <span editable-text="head.value" e-name="value" e-form="headerform" >
+          {{ head.value || 'empty' }}
+        </span>
+                                </td>
+                                <td style="white-space: nowrap">
+                                    <!-- form -->
+                                    <form editable-form name="headerform" onbeforesave="saveHeader($data, head.id)" ng-show="headerform.$visible" class="form-buttons form-inline" shown="insertedHead == head">
+                                        <button type="submit" ng-disabled="headerform.$waiting" class="btn btn-xs btn-info">
+                                          <i class="material-icons" style="font-size:14px;">save</i>
+                                        </button> 
+                                        <button type="button" ng-disabled="headerform.$waiting" ng-click="headerform.$cancel()" class="btn btn-xs btn-default">
+                                          <i class="material-icons" style="font-size:14px;">cancel</i>
+                                        </button>
+                                    </form>
+                                    <div class="buttons" ng-show="!headerform.$visible">
+                                        <button type="button" class="btn btn-xs btn-info"  ng-click="headerform.$show()">
+                                          <i class="material-icons" style="font-size:14px;">visibility</i>
+                                        </button>
+                                        <button type="button" class="btn btn-xs btn-info"  ng-click="removeSingleHeader($index)">
+                                          <i class="material-icons" style="font-size:14px;">delete</i>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td style="white-space: nowrap">
+                                <input type="checkbox" ng-model="head.check" ng-click="myClick(head.id)">
+                                </td>
+                            </tr>
+                        </table>
+                        <button class="btn btn-primary btn-sm" ng-click="addSingleHeader()">Add row</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <br />
+
+     
+                                            
+
+    </div>
+</div>

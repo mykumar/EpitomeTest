@@ -1,0 +1,62 @@
+<!-- START TOPBAR -->
+<div class='logo-area'>
+</div>
+<div class='quick-area'>
+    <div class='pull-left slantit'>
+        <ul class="info-menu left-links list-inline list-unstyled">
+            <li class="sidebar-toggle-wrap">
+                <a href data-toggle="sidebar" class="sidebar_toggle" ng-click="app.settings.menuFolded = !app.settings.menuFolded; menuChatToggle('menu',app.settings.menuFolded) ">
+                    <i class="material-icons">menu</i>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="pull-left pagetitle">
+        <span class='line'></span>
+        <h1>{{app.settings.pagetitle}}</h1>
+        <div></div>
+    </div>
+    <div class="pull-left quickleft" style=''>
+        <ul class="info-menu right-links list-inline list-unstyled">
+            <li ui-sref-active="active">
+                <a ui-sref="app.dashboard" class="nosub">
+                    <i class="material-icons">dashboard</i>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.epitome.domain" class="nosub">
+                    <i class="material-icons">domain</i>
+                </a>
+            </li>
+            <li class="menu-profile-toggle">
+                <li ui-sref-active="active">
+                    <a ui-sref="app.epitome.techtypes" class="nosub">
+                        <i class="material-icons">build</i>
+                    </a>
+                </li>
+            </li>
+            <li class="menu-profile-toggle">
+                <li ui-sref-active="active">
+                    <a ui-sref="app.template.manager" class="nosub">
+                        <i class="material-icons">speaker_notes</i>
+                    </a>
+                </li>
+            </li>
+            <li class="menu-profile-toggle tab">
+                <a href class="profile_toggle" ng-click="app.settings.menuProfile = !app.settings.menuProfile ">
+                    <i class="material-icons">person</i>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class='pull-right quickright'>
+        <ul class="info-menu right-links list-inline list-unstyled">
+            <li class="dropdown profile tab" uib-dropdown>
+                <a ui-sref="access.login">
+                    <i class="material-icons">lock</i> Logout
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- END TOPBAR -->

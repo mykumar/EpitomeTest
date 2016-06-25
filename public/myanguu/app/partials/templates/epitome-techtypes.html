@@ -1,0 +1,51 @@
+<section class="box ">
+            <header class="panel_header">
+                <h2 class="title pull-left">Tech Types</h2>
+                <div class="actions panel_actions pull-right">
+                    <i class="box_toggle material-icons">expand_more</i>
+                    <!-- <i class="box_setting material-icons" ng-click="section_modal()">mode_edit</i> -->
+                    <!-- <i class="box_close material-icons">close</i> -->
+                </div>
+            </header>
+            <div class="content-body">
+                <div class="row">
+                        <!-- <span editable-text="head.id" e-name="id" e-form="headerform">
+                                {{ head.id || 'empty' }}
+                         </span> -->
+                         <p>Selected: {{techTypesObject.selected}}</p>  <br />
+                        <!-- <p> {{techTypesObjectSelected}} </p> <br /> -->
+                        <button type="button" class="btn btn-xs btn-info" >
+                          <i class="material-icons" style="font-size:14px;">delete</i>
+                        </button>
+                        <ui-select ng-model="techTypesObject.selected" on-select="onSelected(techTypesObject.selected)" theme="bootstrap" ng-disabled="disabled" style="width: 200px;" title="Choose a Tech TYpe">
+                            <ui-select-match placeholder="Select or search a Tech Type in the list..."> {{$select.selected.name}}</ui-select-match>
+                            <ui-select-choices repeat="techTypesObject in techTypes | filter: $select.search">
+                              <!-- <span ng-bind-html="techType.id | highlight: $select.search"></span> -->
+                              <small ng-bind-html="techTypesObject.name | highlight: $select.search"></small>
+                            </ui-select-choices>
+                        </ui-select>
+                        <br />
+                        <br />
+                </div>
+                <div class="row" ng-if="!isEmpty(techTypesObjectSelected)">
+                    <uib-tabset justified="true" class="tab-container primary">
+                    <uib-tab ng-repeat="section in sections">
+                            <uib-tab-heading>
+                                        <!-- <i class="fa fa-{{tab.icon}}"></i> --> {{section.smallname}}
+                            </uib-tab-heading>
+                             <!-- <div ng-include="'template1.html'" include-replace></div> -->
+                             <ng-include src=getTemplateName(section.smallname) replace></ng-include>
+                             <!-- <div ng-include="'partials/templates/CA.html'"></div> -->
+                    </uib-tab>
+                    <uib-tab ng-repeat="project in projects">
+                            <uib-tab-heading>
+                                        <!-- <i class="fa fa-{{tab.icon}}"></i> --> {{project.smallname}}
+                            </uib-tab-heading>
+                             <!-- <div ng-include="'template1.html'" include-replace></div> -->
+                             <ng-include src=getTemplateName(project.smallname)  replace></ng-include>
+                             <!-- <div ng-include="'partials/templates/CA.html'"></div> -->
+                    </uib-tab>            
+                    </uib-tabset>
+                </div>
+            </div>
+        </section>

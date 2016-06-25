@@ -1,0 +1,38 @@
+<section class="box ">
+    <header class="panel_header">
+        <h2 class="title pull-left">Template Generator</h2>
+        <div class="actions panel_actions pull-right">
+            <i class="box_toggle material-icons">expand_more</i>
+            <i class="box_setting material-icons" ng-click="section_modal()">mode_edit</i>
+            <i class="box_close material-icons">close</i>
+        </div>
+    </header>
+    <div class="content-body">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <!-- start -->
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <ui-select multiple ng-model="multipleDemo.deSelectedPeople" on-remove="removed($item, $model)" theme="bootstrap" ng-disabled="disabled" close-on-select="false" style="width: 800px;" title="Choose a person">
+                            <ui-select-match placeholder="Select person...">{{$item.name}} &lt;{{$item.email}}&gt;</ui-select-match>
+                            <ui-select-choices repeat="person.email as person in people |  filter: $select.search">
+                              <div ng-bind-html="person.name | highlight: $select.search"></div>
+                              <small>
+                                email: {{person.email}}
+                                age: <span ng-bind-html="''+person.age | highlight: $select.search"></span>
+                              </small>
+                            </ui-select-choices>
+                          </ui-select>
+                          <!-- <p>Last Removed:</p> -->
+                       <!--  <pre>
+                            $item = {{lastRemoved.item}}
+                            $model = {{lastRemoved.model}}
+                            <p>Selected: {{multipleDemo.deSelectedPeople}}</p>
+                        </pre> -->
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

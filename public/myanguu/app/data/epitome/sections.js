@@ -1,0 +1,4 @@
+[
+    {id:2, name: "Career Highlights", type: "single", smallname: "CH"},
+    {id:3, name: "Career Achievements", type: "single", smallname: "CA"}
+]
